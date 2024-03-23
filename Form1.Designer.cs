@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gbCabecera = new System.Windows.Forms.GroupBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnGrabar = new System.Windows.Forms.Button();
             this.txtValorTotal = new System.Windows.Forms.TextBox();
             this.lblValorTotal = new System.Windows.Forms.Label();
             this.txtIva = new System.Windows.Forms.TextBox();
@@ -48,8 +50,6 @@
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.lblCliente = new System.Windows.Forms.Label();
             this.gbDetalle = new System.Windows.Forms.GroupBox();
-            this.btnGrabar = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.gbCabecera.SuspendLayout();
             this.gbDetalle.SuspendLayout();
@@ -85,6 +85,26 @@
             this.gbCabecera.TabIndex = 0;
             this.gbCabecera.TabStop = false;
             this.gbCabecera.Text = "Cabecera";
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(642, 151);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(103, 33);
+            this.btnLimpiar.TabIndex = 19;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnGrabar
+            // 
+            this.btnGrabar.Location = new System.Drawing.Point(641, 100);
+            this.btnGrabar.Name = "btnGrabar";
+            this.btnGrabar.Size = new System.Drawing.Size(103, 33);
+            this.btnGrabar.TabIndex = 18;
+            this.btnGrabar.Text = "Grabar";
+            this.btnGrabar.UseVisualStyleBackColor = true;
+            this.btnGrabar.Click += new System.EventHandler(this.btnGrabar_Click);
             // 
             // txtValorTotal
             // 
@@ -250,24 +270,6 @@
             this.gbDetalle.TabStop = false;
             this.gbDetalle.Text = "Detalle Facturación";
             // 
-            // btnGrabar
-            // 
-            this.btnGrabar.Location = new System.Drawing.Point(641, 100);
-            this.btnGrabar.Name = "btnGrabar";
-            this.btnGrabar.Size = new System.Drawing.Size(103, 33);
-            this.btnGrabar.TabIndex = 18;
-            this.btnGrabar.Text = "Grabar";
-            this.btnGrabar.UseVisualStyleBackColor = true;
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Location = new System.Drawing.Point(642, 151);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(103, 33);
-            this.btnLimpiar.TabIndex = 19;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -285,6 +287,7 @@
             this.Controls.Add(this.gbDetalle);
             this.Controls.Add(this.gbCabecera);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Facturación";
             this.gbCabecera.ResumeLayout(false);
             this.gbCabecera.PerformLayout();

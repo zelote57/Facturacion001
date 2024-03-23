@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FacturacionModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CabeceraFactura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCliente" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="IdentificadorCliente" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="SubTotalIva" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="SubTotalNoIva" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="SubTotalSuma" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Iva" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetalleFactura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producto" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="ValorUnitario" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="ValorTotal" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="GrabaIva" Type="bit" Nullable="false" />
+          <Property Name="CabeceraFacturaId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DetalleFactura_CabeceraFactura">
+          <End Role="CabeceraFactura" Type="Self.CabeceraFactura" Multiplicity="1" />
+          <End Role="DetalleFactura" Type="Self.DetalleFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CabeceraFactura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleFactura">
+              <PropertyRef Name="CabeceraFacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FacturacionModelsStoreContainer">
+          <EntitySet Name="CabeceraFactura" EntityType="Self.CabeceraFactura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleFactura" EntityType="Self.DetalleFactura" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DetalleFactura_CabeceraFactura" Association="Self.FK_DetalleFactura_CabeceraFactura">
+            <End Role="CabeceraFactura" EntitySet="CabeceraFactura" />
+            <End Role="DetalleFactura" EntitySet="DetalleFactura" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FacturacionModels" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CabeceraFactura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCliente" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdentificadorCliente" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SubTotalIva" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="SubTotalNoIva" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="SubTotalSuma" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Iva" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <NavigationProperty Name="DetalleFacturas" Relationship="Self.FK_DetalleFactura_CabeceraFactura" FromRole="CabeceraFactura" ToRole="DetalleFactura" />
+        </EntityType>
+        <EntityType Name="DetalleFactura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Producto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="ValorUnitario" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="ValorTotal" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="GrabaIva" Type="Boolean" Nullable="false" />
+          <Property Name="CabeceraFacturaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CabeceraFactura" Relationship="Self.FK_DetalleFactura_CabeceraFactura" FromRole="DetalleFactura" ToRole="CabeceraFactura" />
+        </EntityType>
+        <Association Name="FK_DetalleFactura_CabeceraFactura">
+          <End Role="CabeceraFactura" Type="Self.CabeceraFactura" Multiplicity="1" />
+          <End Role="DetalleFactura" Type="Self.DetalleFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CabeceraFactura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleFactura">
+              <PropertyRef Name="CabeceraFacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FacturacionDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CabeceraFacturas" EntityType="Self.CabeceraFactura" />
+          <EntitySet Name="DetalleFacturas" EntityType="Self.DetalleFactura" />
+          <AssociationSet Name="FK_DetalleFactura_CabeceraFactura" Association="Self.FK_DetalleFactura_CabeceraFactura">
+            <End Role="CabeceraFactura" EntitySet="CabeceraFacturas" />
+            <End Role="DetalleFactura" EntitySet="DetalleFacturas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FacturacionModelsStoreContainer" CdmEntityContainer="FacturacionDbContext">
+          <EntitySetMapping Name="CabeceraFacturas">
+            <EntityTypeMapping TypeName="FacturacionModels.CabeceraFactura">
+              <MappingFragment StoreEntitySet="CabeceraFactura">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="IdentificadorCliente" ColumnName="IdentificadorCliente" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="SubTotalIva" ColumnName="SubTotalIva" />
+                <ScalarProperty Name="SubTotalNoIva" ColumnName="SubTotalNoIva" />
+                <ScalarProperty Name="SubTotalSuma" ColumnName="SubTotalSuma" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleFacturas">
+            <EntityTypeMapping TypeName="FacturacionModels.DetalleFactura">
+              <MappingFragment StoreEntitySet="DetalleFactura">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+                <ScalarProperty Name="GrabaIva" ColumnName="GrabaIva" />
+                <ScalarProperty Name="CabeceraFacturaId" ColumnName="CabeceraFacturaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
