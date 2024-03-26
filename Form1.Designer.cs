@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gbCabecera = new System.Windows.Forms.GroupBox();
+            this.btnQuitarFilaDetalle = new System.Windows.Forms.Button();
+            this.btnAgregarFilaDetalle = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGrabar = new System.Windows.Forms.Button();
             this.txtValorTotal = new System.Windows.Forms.TextBox();
@@ -50,14 +52,16 @@
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.lblCliente = new System.Windows.Forms.Label();
             this.gbDetalle = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvDetalleFactura = new System.Windows.Forms.DataGridView();
             this.gbCabecera.SuspendLayout();
             this.gbDetalle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleFactura)).BeginInit();
             this.SuspendLayout();
             // 
             // gbCabecera
             // 
+            this.gbCabecera.Controls.Add(this.btnQuitarFilaDetalle);
+            this.gbCabecera.Controls.Add(this.btnAgregarFilaDetalle);
             this.gbCabecera.Controls.Add(this.btnLimpiar);
             this.gbCabecera.Controls.Add(this.btnGrabar);
             this.gbCabecera.Controls.Add(this.txtValorTotal);
@@ -86,9 +90,31 @@
             this.gbCabecera.TabStop = false;
             this.gbCabecera.Text = "Cabecera";
             // 
+            // btnQuitarFilaDetalle
+            // 
+            this.btnQuitarFilaDetalle.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnQuitarFilaDetalle.Location = new System.Drawing.Point(506, 171);
+            this.btnQuitarFilaDetalle.Name = "btnQuitarFilaDetalle";
+            this.btnQuitarFilaDetalle.Size = new System.Drawing.Size(103, 32);
+            this.btnQuitarFilaDetalle.TabIndex = 21;
+            this.btnQuitarFilaDetalle.Text = "Quitar Producto";
+            this.btnQuitarFilaDetalle.UseVisualStyleBackColor = false;
+            this.btnQuitarFilaDetalle.Click += new System.EventHandler(this.btnQuitarFilaDetalle_Click);
+            // 
+            // btnAgregarFilaDetalle
+            // 
+            this.btnAgregarFilaDetalle.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnAgregarFilaDetalle.Location = new System.Drawing.Point(384, 171);
+            this.btnAgregarFilaDetalle.Name = "btnAgregarFilaDetalle";
+            this.btnAgregarFilaDetalle.Size = new System.Drawing.Size(103, 32);
+            this.btnAgregarFilaDetalle.TabIndex = 20;
+            this.btnAgregarFilaDetalle.Text = "Agregar Producto";
+            this.btnAgregarFilaDetalle.UseVisualStyleBackColor = false;
+            this.btnAgregarFilaDetalle.Click += new System.EventHandler(this.btnAgregarFilaDetalle_Click);
+            // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(642, 151);
+            this.btnLimpiar.Location = new System.Drawing.Point(642, 132);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(103, 33);
             this.btnLimpiar.TabIndex = 19;
@@ -98,7 +124,7 @@
             // 
             // btnGrabar
             // 
-            this.btnGrabar.Location = new System.Drawing.Point(641, 100);
+            this.btnGrabar.Location = new System.Drawing.Point(642, 91);
             this.btnGrabar.Name = "btnGrabar";
             this.btnGrabar.Size = new System.Drawing.Size(103, 33);
             this.btnGrabar.TabIndex = 18;
@@ -261,7 +287,7 @@
             // 
             // gbDetalle
             // 
-            this.gbDetalle.Controls.Add(this.dataGridView1);
+            this.gbDetalle.Controls.Add(this.dgvDetalleFactura);
             this.gbDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbDetalle.Location = new System.Drawing.Point(0, 209);
             this.gbDetalle.Name = "gbDetalle";
@@ -270,14 +296,16 @@
             this.gbDetalle.TabStop = false;
             this.gbDetalle.Text = "Detalle Facturación";
             // 
-            // dataGridView1
+            // dgvDetalleFactura
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(794, 222);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvDetalleFactura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetalleFactura.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDetalleFactura.Location = new System.Drawing.Point(3, 16);
+            this.dgvDetalleFactura.Name = "dgvDetalleFactura";
+            this.dgvDetalleFactura.Size = new System.Drawing.Size(794, 222);
+            this.dgvDetalleFactura.TabIndex = 0;
+            this.dgvDetalleFactura.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleFactura_CellContentClick);
+            
             // 
             // Form1
             // 
@@ -292,7 +320,7 @@
             this.gbCabecera.ResumeLayout(false);
             this.gbCabecera.PerformLayout();
             this.gbDetalle.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleFactura)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -321,7 +349,9 @@
         private System.Windows.Forms.Label lblValorTotal;
         private System.Windows.Forms.Button btnGrabar;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvDetalleFactura;
+        private System.Windows.Forms.Button btnAgregarFilaDetalle;
+        private System.Windows.Forms.Button btnQuitarFilaDetalle;
     }
 }
 

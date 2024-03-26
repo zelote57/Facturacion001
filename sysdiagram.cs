@@ -12,16 +12,12 @@ namespace Facturacion
     using System;
     using System.Collections.Generic;
     
-    public partial class DetalleFactura
+    public partial class sysdiagram
     {
-        public System.Guid Id { get; set; }
-        public string Producto { get; set; }
-        public int Cantidad { get; set; }
-        public decimal ValorUnitario { get; set; }
-        public decimal ValorTotal { get; set; }
-        public bool GrabaIva { get; set; }
-        public System.Guid CabeceraFacturaId { get; set; }
-    
-        public virtual CabeceraFactura CabeceraFactura { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

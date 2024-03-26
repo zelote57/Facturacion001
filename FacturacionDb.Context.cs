@@ -27,5 +27,6 @@ namespace Facturacion
     
         public virtual DbSet<CabeceraFactura> CabeceraFacturas { get; set; }
         public virtual DbSet<DetalleFactura> DetalleFacturas { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Facturacion
             this.DetalleFacturas = new HashSet<DetalleFactura>();
         }
     
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
         public string NombreCliente { get; set; }
         public string IdentificadorCliente { get; set; }
         public System.DateTime Fecha { get; set; }
@@ -29,6 +29,7 @@ namespace Facturacion
         public decimal SubTotalSuma { get; set; }
         public decimal Iva { get; set; }
         public decimal Total { get; set; }
+        public int Secuencial { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleFactura> DetalleFacturas { get; set; }
