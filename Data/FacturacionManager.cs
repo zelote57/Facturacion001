@@ -1,4 +1,5 @@
 ﻿using Facturacion.Models;
+using System.Linq;
 
 namespace Facturacion.Data
 {
@@ -25,6 +26,17 @@ namespace Facturacion.Data
                 return false;
             }
             return true;
+        }
+
+        public int ObtenerSecuencial()
+        {
+            var secuencial = 0;
+            using (var db = new FacturacionDbContext())
+            {
+                secuencial = db.CabeceraFacturas.OrderByDescending(t => t.Fecha)
+                    .Select(x => x.Secuencial).FirstOrDefault();
+            }
+            return secuencial + 1;
         }
     }
 }

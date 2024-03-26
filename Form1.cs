@@ -17,8 +17,14 @@ namespace Facturacion
         public Form1()
         {
             InitializeComponent();
+            ObtenerMostrarSecuencial();
             LimpiarFormulario();
-            InicializarGridDetalleDeFactura();
+        }
+
+        private void ObtenerMostrarSecuencial()
+        {
+            var manager = new FacturacionManager();
+            lblNumeroSecuencial.Text = manager.ObtenerSecuencial().ToString();
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -28,9 +34,14 @@ namespace Facturacion
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
+            if (!ValidarFormulario())
+            {
+                return;
+            }
+
             //crear una instancia de la clase a usar
             var facManager = new FacturacionManager();
-            
+
             var nuevaFactura = ObtenerDatosDelFormulario();
 
             //grabar cabecera de factura
@@ -43,7 +54,7 @@ namespace Facturacion
             else
             {
                 MessageBox.Show("No se guardaron Datos");
-            }            
+            }
         }
 
         private FacturaModelo ObtenerDatosDelFormulario()
@@ -89,7 +100,7 @@ namespace Facturacion
             _detalleDeFacturaGrid = new List<DetalleFacturaDto>();
             _detalleDeFacturaGridGrabaIva = new List<Guid>();
             _detalleDeFacturaGridNoGrabaIva = new List<Guid>();
-            AgregarFilaDetalleFactura();            
+            AgregarFilaDetalleFactura();
         }
 
         private void AgregarFilaDetalleFactura()
@@ -112,6 +123,8 @@ namespace Facturacion
 
         private void LimpiarFormulario()
         {
+            lblFecha.Text = DateTime.Now.ToShortDateString();
+
             txtCliente.Text = string.Empty;
             txtNumeroIdentificacion.Text = string.Empty;
             txtSubTotalIva.Text = _decimalZeroValue;
@@ -119,11 +132,13 @@ namespace Facturacion
             txtSubTotalSuma.Text = _decimalZeroValue;
             txtIva.Text = _decimalZeroValue;
             txtValorTotal.Text = _decimalZeroValue;
+
+            InicializarGridDetalleDeFactura();
         }
 
         private void btnAgregarFilaDetalle_Click(object sender, EventArgs e)
         {
-            AgregarFilaDetalleFactura();            
+            AgregarFilaDetalleFactura();
         }
 
         private void btnQuitarFilaDetalle_Click(object sender, EventArgs e)
@@ -167,7 +182,7 @@ namespace Facturacion
             dgvDetalleFactura.Columns[nameof(DetalleFacturaDto.Id)].Visible = false;
             CalcularTotales();
         }
-        
+
         private void dgvDetalleFactura_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
@@ -180,14 +195,14 @@ namespace Facturacion
                     var grabaIvaDetalleFactura = (bool)dgvDetalleFactura.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue;
 
                     if (grabaIvaDetalleFactura)
-                    {                        
+                    {
                         _detalleDeFacturaGridNoGrabaIva.Remove(idDetalleFactura);
 
                         var existe = _detalleDeFacturaGridGrabaIva.Exists(x => x.Equals(idDetalleFactura));
                         if (!existe)
                         {
                             _detalleDeFacturaGridGrabaIva.Add(idDetalleFactura);
-                        }                        
+                        }
                     }
                     else
                     {
@@ -197,7 +212,7 @@ namespace Facturacion
                         if (!existe)
                         {
                             _detalleDeFacturaGridNoGrabaIva.Add(idDetalleFactura);
-                        }                        
+                        }
                     }
 
                     CalcularTotales();
@@ -237,6 +252,43 @@ namespace Facturacion
             txtSubTotalSuma.Text = subTotalSuma.ToString("0.00");
             txtIva.Text = iva.ToString("0.00");
             txtValorTotal.Text = valorTotal.ToString("0.00");
+        }
+
+        private bool ValidarFormulario()
+        {
+            if (string.IsNullOrEmpty(txtCliente.Text.Trim()))
+            {
+                MessageBox.Show("Debe ingresar un nombre del cliente");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(txtNumeroIdentificacion.Text.Trim()))
+            {
+                MessageBox.Show("Debe ingresar un número de identificación del cliente");
+                return false;
+            }
+
+            bool isNumeric = int.TryParse(txtNumeroIdentificacion.Text.Trim(), out int n);
+
+            if (!isNumeric)
+            {
+                MessageBox.Show("Debe ingresar un número de identificación válido");
+                return false;
+            }
+
+            if (_detalleDeFacturaGrid.Count == 0)
+            {
+                MessageBox.Show("Debe agregar productos");
+                return false;
+            }
+
+            if (decimal.Parse(txtValorTotal.Text) == 0)
+            {
+                MessageBox.Show("Debe agregar un producto válido");
+                return false;
+            }
+
+            return true;
         }
     }
 }

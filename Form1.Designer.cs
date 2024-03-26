@@ -229,9 +229,10 @@
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
+            this.lblFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFecha.Location = new System.Drawing.Point(684, 56);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(61, 13);
+            this.lblFecha.Size = new System.Drawing.Size(71, 13);
             this.lblFecha.TabIndex = 6;
             this.lblFecha.Text = "2024-03-20";
             // 
@@ -263,9 +264,10 @@
             // lblNumeroSecuencial
             // 
             this.lblNumeroSecuencial.AutoSize = true;
+            this.lblNumeroSecuencial.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumeroSecuencial.Location = new System.Drawing.Point(684, 26);
             this.lblNumeroSecuencial.Name = "lblNumeroSecuencial";
-            this.lblNumeroSecuencial.Size = new System.Drawing.Size(13, 13);
+            this.lblNumeroSecuencial.Size = new System.Drawing.Size(14, 13);
             this.lblNumeroSecuencial.TabIndex = 2;
             this.lblNumeroSecuencial.Text = "1";
             // 
@@ -305,7 +307,6 @@
             this.dgvDetalleFactura.Size = new System.Drawing.Size(794, 222);
             this.dgvDetalleFactura.TabIndex = 0;
             this.dgvDetalleFactura.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleFactura_CellContentClick);
-            
             // 
             // Form1
             // 
